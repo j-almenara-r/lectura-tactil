@@ -1,4 +1,4 @@
-# Snap Scroll Browser Extension
+# lectura-tactil
 
 A Microsoft Edge browser extension that enables snap scroll functionality on any webpage, making it easier for your brain to keep track of content as you scroll.
 
