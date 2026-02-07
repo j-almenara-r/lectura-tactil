@@ -1,0 +1,37 @@
+/* Snap Scroll Styles */
+
+/* Enable CSS scroll snap on the root element when snap scroll is active */
+body.snap-scroll-enabled {
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+}
+
+/* Apply snap points to sections */
+body.snap-scroll-enabled .snap-scroll-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+/* For pages with virtual sections (no clear content sections) */
+body.snap-scroll-container-virtual {
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+}
+
+/* Improve scroll smoothness */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optional: Add subtle visual indicator for snap points (can be disabled) */
+body.snap-scroll-enabled.show-indicators .snap-scroll-section::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 20px;
+  background: rgba(0, 120, 215, 0.5);
+  border-radius: 0 2px 2px 0;
+  z-index: 9999;
+}
