@@ -1,0 +1,16 @@
+# Development files
+*.sh
+*.svg
+node_modules/
+.DS_Store
+.vscode/
+*.log
+
+# Temporary files
+/tmp/
+*.tmp
+*.bak
+
+# OS files
+Thumbs.db
+desktop.ini
