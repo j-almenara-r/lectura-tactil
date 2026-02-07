@@ -4,9 +4,10 @@ A Microsoft Edge browser extension that enables snap scroll functionality on any
 
 ## Features
 
-- 🎯 **Snap Scrolling**: Automatically aligns content sections when scrolling
+- 🎯 **Discrete Pages**: Creates page-like sections with clear boundaries for a book-like reading experience
+- ⚡ **F9 Toggle**: Press F9 to quickly toggle reading mode on/off (like Edge's native reading mode)
 - ⚡ **Easy Toggle**: Enable/disable snap scroll with a single click
-- ⌨️ **Keyboard Navigation**: Use Space/PageDown and PageUp to navigate between sections
+- ⌨️ **Keyboard Navigation**: Use Space/PageDown and PageUp to navigate between discrete pages
 - 🌐 **Works Everywhere**: Automatically detects content sections on any webpage
 - 📱 **Android Compatible**: Designed for Microsoft Edge on Android
 
@@ -27,20 +28,23 @@ A Microsoft Edge browser extension that enables snap scroll functionality on any
 
 ## Usage
 
-1. Click the Snap Scroll extension icon in your browser toolbar
+1. Click the Lectura Tactil extension icon in your browser toolbar
 2. Toggle the "Enable Snap Scroll" switch
-3. Browse any webpage - scrolling will now snap to content sections
-4. Use keyboard shortcuts for navigation:
-   - **Space** or **Page Down**: Jump to next section
-   - **Page Up**: Jump to previous section
+3. Or press **F9** to quickly toggle reading mode on/off
+4. Browse any webpage - content will snap to discrete page-like sections
+5. Use keyboard shortcuts for navigation:
+   - **F9**: Toggle reading mode on/off
+   - **Space** or **Page Down**: Jump to next page
+   - **Page Up**: Jump to previous page
 
 ## How It Works
 
-The extension uses CSS scroll-snap properties and intelligent section detection to:
-- Automatically identify content sections (articles, sections, divs)
-- Apply smooth scrolling behavior
-- Snap to section boundaries when scrolling
-- Provide keyboard shortcuts for easy navigation
+The extension works like a Reading Mode with discrete pages as its distinctive feature:
+- Automatically identifies content sections (articles, sections, divs)
+- Creates discrete page-like boundaries with mandatory snap behavior
+- Provides F9 keyboard shortcut to quickly toggle (like Edge's reading mode)
+- Applies smooth scrolling and snap points for a book-like reading experience
+- Provides keyboard shortcuts for easy page-by-page navigation
 
 ## Files Structure
 

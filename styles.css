@@ -2,19 +2,26 @@
 
 /* Enable CSS scroll snap on the root element when snap scroll is active */
 body.snap-scroll-enabled {
-  scroll-snap-type: y proximity;
+  scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
 }
 
-/* Apply snap points to sections */
+/* Apply snap points to sections with discrete page styling */
 body.snap-scroll-enabled .snap-scroll-section {
   scroll-snap-align: start;
-  scroll-snap-stop: normal;
+  scroll-snap-stop: always;
 }
 
-/* For pages with virtual sections (no clear content sections) */
-body.snap-scroll-container-virtual {
-  scroll-snap-type: y proximity;
+/* Discrete page styling - creates clear page-like boundaries */
+body.snap-scroll-enabled .discrete-page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 2rem;
+}
+
+/* For pages with discrete page mode (no clear content sections) */
+body.discrete-pages-mode {
+  scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
 }
 
