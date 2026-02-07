@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Page for Snap Scroll Extension</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    
+    section {
+      min-height: 100vh;
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    section:nth-child(odd) {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    
+    section:nth-child(even) {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+    }
+    
+    section:nth-child(3) {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+    
+    section:nth-child(4) {
+      background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    }
+    
+    section:nth-child(5) {
+      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    }
+    
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+    
+    p {
+      font-size: 1.2em;
+      max-width: 600px;
+      text-align: center;
+    }
+    
+    .instruction {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <h1>🎯 Section 1: Welcome</h1>
+    <p>This is a test page for the Snap Scroll extension. Try scrolling or using the Space/PageDown keys to navigate between sections.</p>
+    <div class="instruction">
+      <strong>Instructions:</strong><br>
+      1. Install the Snap Scroll extension<br>
+      2. Enable it from the popup<br>
+      3. Scroll or use keyboard shortcuts
+    </div>
+  </section>
+  
+  <section>
+    <h1>📱 Section 2: Features</h1>
+    <p>The snap scroll feature automatically aligns content sections as you scroll, making it easier to focus on one section at a time.</p>
+  </section>
+  
+  <section>
+    <h1>⌨️ Section 3: Keyboard Navigation</h1>
+    <p>Use Space or PageDown to go to the next section, and PageUp to go to the previous section. It's that simple!</p>
+  </section>
+  
+  <section>
+    <h1>🌐 Section 4: Universal</h1>
+    <p>This extension works on any webpage. The algorithm automatically detects content sections and applies snap points.</p>
+  </section>
+  
+  <section>
+    <h1>✅ Section 5: Conclusion</h1>
+    <p>Enjoy a better reading experience with Snap Scroll! Toggle it on or off anytime from the extension popup.</p>
+  </section>
+</body>
+</html>
