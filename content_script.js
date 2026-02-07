@@ -15,7 +15,7 @@ chrome.storage.sync.get(['snapScrollEnabled'], function(result) {
   }
 });
 
-// Listen for messages from popup and commands
+// Listen for messages from popup and background script
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'toggleSnapScroll') {
     if (request.enabled) {
@@ -26,24 +26,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     sendResponse({ success: true });
   }
   return true;
-});
-
-// Listen for F9 keyboard command to toggle reading mode
-chrome.commands.onCommand.addListener((command) => {
-  if (command === 'toggle-reading-mode') {
-    // Toggle the current state
-    const isCurrentlyEnabled = document.body.classList.contains('snap-scroll-enabled');
-    
-    if (isCurrentlyEnabled) {
-      disableSnapScroll();
-      // Update storage to reflect the change
-      chrome.storage.sync.set({ snapScrollEnabled: false });
-    } else {
-      enableSnapScroll();
-      // Update storage to reflect the change
-      chrome.storage.sync.set({ snapScrollEnabled: true });
-    }
-  }
 });
 
 function enableSnapScroll() {
