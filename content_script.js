@@ -15,7 +15,7 @@ chrome.storage.sync.get(['snapScrollEnabled'], function(result) {
   }
 });
 
-// Listen for messages from popup
+// Listen for messages from popup and commands
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'toggleSnapScroll') {
     if (request.enabled) {
@@ -26,6 +26,24 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     sendResponse({ success: true });
   }
   return true;
+});
+
+// Listen for F9 keyboard command to toggle reading mode
+chrome.commands.onCommand.addListener((command) => {
+  if (command === 'toggle-reading-mode') {
+    // Toggle the current state
+    const isCurrentlyEnabled = document.body.classList.contains('snap-scroll-enabled');
+    
+    if (isCurrentlyEnabled) {
+      disableSnapScroll();
+      // Update storage to reflect the change
+      chrome.storage.sync.set({ snapScrollEnabled: false });
+    } else {
+      enableSnapScroll();
+      // Update storage to reflect the change
+      chrome.storage.sync.set({ snapScrollEnabled: true });
+    }
+  }
 });
 
 function enableSnapScroll() {
@@ -42,11 +60,13 @@ function enableSnapScroll() {
 function disableSnapScroll() {
   // Remove snap scroll class from body
   document.body.classList.remove('snap-scroll-enabled');
+  document.body.classList.remove('discrete-pages-mode');
   
   // Remove snap scroll classes from all elements
   const snapElements = document.querySelectorAll('.snap-scroll-section');
   snapElements.forEach(element => {
     element.classList.remove('snap-scroll-section');
+    element.classList.remove('discrete-page');
   });
 }
 
@@ -74,33 +94,42 @@ function applySnapPoints() {
     }
   }
   
-  // If no sections found, use viewport-height based sections
+  // If no sections found, create discrete page-like sections
   if (sections.length === 0) {
-    createVirtualSections();
+    createDiscretePages();
   } else {
-    // Apply snap point class to found sections
+    // Apply snap point class to found sections for discrete page behavior
     sections.forEach(section => {
       // Only apply to sections that are large enough
       if (section.offsetHeight > MIN_SECTION_HEIGHT_PX) {
         section.classList.add('snap-scroll-section');
+        // Add discrete page styling
+        section.classList.add('discrete-page');
       }
     });
   }
 }
 
-function createVirtualSections() {
-  // For pages without clear sections, divide content into viewport-sized chunks
+function createDiscretePages() {
+  // For pages without clear sections, create discrete page-like divisions
+  // This creates a reading mode experience with clear page boundaries
   const mainContent = document.body;
   const viewportHeight = window.innerHeight;
   const totalHeight = mainContent.scrollHeight;
   
-  // Don't create virtual sections if content is too short
+  // Don't create discrete pages if content is too short
   if (totalHeight < viewportHeight * 2) {
     return;
   }
   
-  // Add snap container class to body for CSS to handle scroll-snap
-  document.body.classList.add('snap-scroll-container-virtual');
+  // Calculate number of discrete pages based on viewport height
+  const numPages = Math.ceil(totalHeight / viewportHeight);
+  
+  // Add discrete pages container class to body for CSS to handle scroll-snap
+  document.body.classList.add('discrete-pages-mode');
+  
+  // Store the page information for navigation
+  document.body.dataset.numDiscretePages = numPages;
 }
 
 function observeDOMChanges() {
