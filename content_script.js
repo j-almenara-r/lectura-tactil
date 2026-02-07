@@ -104,14 +104,8 @@ function createDiscretePages() {
     return;
   }
   
-  // Calculate number of discrete pages based on viewport height
-  const numPages = Math.ceil(totalHeight / viewportHeight);
-  
   // Add discrete pages container class to body for CSS to handle scroll-snap
   document.body.classList.add('discrete-pages-mode');
-  
-  // Store the page information for navigation
-  document.body.dataset.numDiscretePages = numPages;
 }
 
 function observeDOMChanges() {
