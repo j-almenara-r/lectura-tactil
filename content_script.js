@@ -1,5 +1,11 @@
 // Content script for snap scroll functionality
 
+// Configuration constants
+const MAX_SECTIONS = 50; // Maximum number of sections to prevent performance issues on complex pages
+const MIN_SECTION_HEIGHT_PX = 100; // Minimum height for a section to be considered for snap points
+const DOM_OBSERVER_DEBOUNCE_MS = 1000; // Debounce time for DOM changes to prevent excessive reprocessing
+const SCROLL_THRESHOLD_PX = 50; // Pixel threshold to determine if we're past a section boundary
+
 // Check if snap scroll is enabled
 chrome.storage.sync.get(['snapScrollEnabled'], function(result) {
   const isEnabled = result.snapScrollEnabled !== false; // Default to true
@@ -62,7 +68,7 @@ function applySnapPoints() {
   
   for (const selector of selectors) {
     const elements = document.querySelectorAll(selector);
-    if (elements.length > 0 && elements.length < 50) {
+    if (elements.length > 0 && elements.length < MAX_SECTIONS) {
       sections = Array.from(elements);
       break;
     }
@@ -75,7 +81,7 @@ function applySnapPoints() {
     // Apply snap point class to found sections
     sections.forEach(section => {
       // Only apply to sections that are large enough
-      if (section.offsetHeight > 100) {
+      if (section.offsetHeight > MIN_SECTION_HEIGHT_PX) {
         section.classList.add('snap-scroll-section');
       }
     });
@@ -112,7 +118,7 @@ function observeDOMChanges() {
         // Reapply snap points
         applySnapPoints();
       }
-    }, 1000);
+    }, DOM_OBSERVER_DEBOUNCE_MS);
   });
   
   // Observe changes to the body and its children
@@ -149,7 +155,7 @@ function scrollToNextSection() {
     const rect = section.getBoundingClientRect();
     const absoluteTop = rect.top + currentScrollY;
     
-    if (absoluteTop > currentScrollY + 50) {
+    if (absoluteTop > currentScrollY + SCROLL_THRESHOLD_PX) {
       section.scrollIntoView({ behavior: 'smooth', block: 'start' });
       return;
     }
@@ -168,7 +174,7 @@ function scrollToPreviousSection() {
     const rect = section.getBoundingClientRect();
     const absoluteTop = rect.top + currentScrollY;
     
-    if (absoluteTop < currentScrollY - 50) {
+    if (absoluteTop < currentScrollY - SCROLL_THRESHOLD_PX) {
       section.scrollIntoView({ behavior: 'smooth', block: 'start' });
       return;
     }
